@@ -26,9 +26,9 @@ html, body {
 }
 
 body {
-    font-family: 'Press Start 2P', cursive; /* Arcade-style font */
-    background: radial-gradient(circle at center, #000 0%, #333 100%); /* Arcade-style black background with gradient */
-    color: #0f0; /* Neon green text */
+    font-family: 'Press Start 2P', cursive; 
+    background: radial-gradient(circle at center, #000 0%, #333 100%); 
+    color: #0f0; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,23 +36,23 @@ body {
 
 .container {
     text-align: center;
-    max-width: 800px; /* Increase width */
+    max-width: 800px; 
     width: 100%;
-    height: 80%; /* Increase height */
-    padding: 30px; /* Add padding for better spacing */
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background with some transparency */
-    border-radius: 10px; /* Optional: Rounded corners */
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); /* Neon glow */
+    height: 80%; 
+    padding: 30px; 
+    background-color: rgba(0, 0, 0, 0.8); 
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
+    justify-content: center; 
 }
 
 #timer {
     margin-top: 20px;
     font-size: 1.5em;
     font-weight: bold;
-    text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0; /* Neon glow effect */
+    text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0; 
 }
 
 .digit-input {
