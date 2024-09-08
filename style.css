@@ -1,0 +1,98 @@
+
+body {
+    font-family: 'Press Start 2P', cursive; /* Arcade-style font */
+    text-align: center;
+
+
+    background: radial-gradient(circle at center, #000 0%, #222 100%); /* Arcade-style black background with gradient */
+    color: #0f0; /* Neon green text */
+}
+
+.balangay-fair {
+    position: absolute;
+    top: 15em; /* Aligns the element to the top of the container */
+    right: 2em;
+   
+}
+
+.balangay-text {
+    position: absolute;
+    top: 5em; /* Distance from the top of the containing block */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to ensure centering */
+    font-size: 3em; /* Adjust as needed */
+    color: #ff66cc; /* Neon pink text color */
+    text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff66cc, 0 0 30px #ff66cc, 0 0 40px #ff66cc; /* Glowing effect */
+}
+
+.container {
+    width: 1500px; /* Fixed width */
+    height: 700px; /* Fixed height */
+
+    display: flex;
+    margin-top: 10em;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    border: 2px solid #0f0; /* Neon green border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    background-color: #000; /* Dark background for container */
+    box-shadow: 0 0 20px #0f0; /* Neon glow effect */
+    overflow: hidden; /* Prevent overflow */
+    padding: 3em;
+}
+
+.row {
+    width: 100%; /* Ensure row takes full width of container */
+}
+.col-md-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.btn-primary {
+    background-color: #ff007f; /* Pink for arcade feel */
+    border-color: #ff007f;
+    box-shadow: 0 0 10px #ff007f; /* Neon glow */
+    text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff66cc, 0 0 30px #ff66cc, 0 0 40px #ff66cc; /* Glowing effect */
+}
+.btn-primary:hover {
+    background-color: #e60073; /* Darker pink for hover */
+    border-color: #e60073;
+}
+.form-label {
+    color: #0f0; /* Neon green */
+}
+.form-control {
+    background-color: #222; /* Dark background for input */
+    color: #0f0; /* Neon green text */
+    border: 2px solid #0f0; /* Neon green border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 5px #0f0; /* Neon glow */
+}
+.form-control:focus {
+    background-color: #111; /* Slightly darker background on focus */
+    border-color: #0f0;
+    box-shadow: 0 0 5px #0f0; /* Neon glow on focus */
+    color: #0f0;
+}
+.scoreboard {
+    background-color: #333; /* Dark background for scoreboard */
+    color: #0f0; /* Neon green text */
+    border: 2px solid #0f0; /* Neon green border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px #0f0; /* Neon glow effect */
+    padding: 20px;
+    height: 100%; /* Full height of container */
+    overflow-y: auto; /* Scroll if content overflows */
+}
+.scoreboard h2 {
+    margin-bottom: 20px;
+}
+.scoreboard ul {
+    list-style: none;
+    padding: 0;
+}
+.scoreboard li {
+    margin: 10px 0;
+}
