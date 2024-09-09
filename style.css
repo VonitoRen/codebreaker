@@ -17,7 +17,7 @@ body {
 
 .balangay-text {
     position: absolute;
-    top: 5em; /* Distance from the top of the containing block */
+    top: 4.2em; /* Distance from the top of the containing block */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Adjust to ensure centering */
     font-size: 3em; /* Adjust as needed */

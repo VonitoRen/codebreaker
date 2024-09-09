@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        
                             <input type="text" class="form-control mb-5 mt-2" id="username" name="username" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Start Game</button>
+                        <button type="submit" class="btn btn-primary start-btn">Start Game</button>
                     </form>
                 </div>
                 <div class="col-md-6">
@@ -134,6 +134,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     console.log("Status: " + status);
                     console.log("Error: " + error);
                     console.log("XHR: ", xhr);
+                }
+            });
+            $(document).on('keypress', function(e) {
+                // Check if the key pressed is "Enter" (key code 13)
+                if (e.which === 13) {
+                // Trigger the click event of a button (e.g., with id "submitBtn")
+                $('.start-btn').click();
                 }
             });
         });

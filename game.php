@@ -175,21 +175,119 @@ body {
         let countdown;
         let timeLeft = 60;  // 60 seconds for the game
         let attempts = 0;
-
-        function startTimer() {
-            timeLeft = 60;
-            $('#time').text(timeLeft);
-
-            countdown = setInterval(() => {
-                timeLeft--;
-                $('#time').text(timeLeft);
-
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    gameOver();
-                }
-            }, 1000);  // Update every second
+// Handle left and right arrow keys for navigation between inputs
+// Handle left and right arrow keys for navigation between inputs
+// Handle left and right arrow keys for navigation between inputs
+$(document).ready(function() {
+    // Handle arrow key navigation
+    $('.digit-input').on('keydown', function(e) {
+        const currentInput = $(this);
+        const currentValue = currentInput.val();
+        
+        if (e.keyCode === 37) { // Left arrow key
+            e.preventDefault();
+            let prevInput = currentInput.prev('.digit-input');
+            if (prevInput.length > 0) {
+                setTimeout(() => { prevInput.focus(); }, 10); // Small delay to prevent focus issues
+            } else {
+                // If no previous input, go to the last input (circular navigation)
+                setTimeout(() => { $('.digit-input').last().focus(); }, 10);
+            }
+        } else if (e.keyCode === 39) { // Right arrow key
+            e.preventDefault();
+            let nextInput = currentInput.next('.digit-input');
+            if (nextInput.length > 0) {
+                setTimeout(() => { nextInput.focus(); }, 10); // Small delay to prevent focus issues
+            } else {
+                // If no next input, go to the first input (circular navigation)
+                setTimeout(() => { $('.digit-input').first().focus(); }, 10);
+            }
         }
+    });
+
+    // Handle auto focus when a digit is entered
+    $('.digit-input').on('input', function() {
+        const currentInput = $(this);
+        const nextInput = currentInput.next('.digit-input');
+        const prevInput = currentInput.prev('.digit-input');
+
+        if (currentInput.val().length === 1) {
+            if (nextInput.length > 0) {
+                nextInput.focus(); // Move focus to the next input
+            } else {
+                // If no next input, move to the first input (optional, if you want to loop)
+                $('.digit-input').first().focus();
+            }
+        }
+    });
+
+    $('.digit-input').on('focus', function() {
+        $(this).select(); // Select the text in the input field
+    });
+});
+// Automatically start the timer when the document is ready
+$(document).ready(function() {
+    startTimer();
+    $('#digit1').focus(); // Focus on the first input on page load
+
+    // Submit the guess when the 'Submit Guess' button is clicked
+    $('#submitGuessBtn').on('click', function() {
+        submitGuess();
+    });
+
+    // Restart the game when the 'Restart Game' button is clicked
+    $('#restartBtn').on('click', function() {
+        restartGame();
+    });
+
+    // Submit the guess when Enter is pressed while on a digit input
+    $('.digit-input').on('keypress', function(e) {
+        if (e.which === 13) { // Enter key
+            submitGuess();
+        }
+    });
+});
+
+function startTimer() {
+    // Clear any existing interval to prevent multiple intervals running
+    clearInterval(countdown);
+
+    timeLeft = 60;
+    $('#time').text(timeLeft);
+
+    countdown = setInterval(() => {
+        timeLeft--;
+        $('#time').text(timeLeft);
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            gameOver();
+        }
+    }, 1000);  // Update every second
+}
+
+
+
+function restartGame() {
+    $.ajax({
+        type: 'POST',
+        url: 'codebreaker.php',
+        data: { restart: true },
+        success: function(response) {
+            let data = JSON.parse(response);
+            $('#message').html(data.message).removeClass('text-danger text-success');
+            $('.digit-input').prop('disabled', false).val('');
+            $('#submitGuessBtn').prop('disabled', false);
+            $('#submitGameResults').hide(); // Hide results submission button
+            startTimer();  // Restart the timer
+            $('#digit1').focus();  // Focus on the first input field
+            $('.digit-input').removeClass('correct present incorrect'); // Reset colors
+
+            // Reset attempts counter
+            attempts = 0;
+        }
+    });
+}
 
         function gameOver() {
             $('#message').text("Time's up! You failed to break the code.").addClass('text-danger');
@@ -202,16 +300,7 @@ body {
             $('#attempts').val(attempts);
         }
 
-        $('.digit-input').on('keyup', function (e) {
-            let nextInput = $(this).next('.digit-input');
-            if (this.value.length == 1 && nextInput.length > 0) {
-                nextInput.focus();
-            }
-        });
 
-        $('.digit-input').on('focus', function() {
-            $(this).select();  // Select the text in the input field
-        });
 
         function checkGuess(guess) {
             let guessArr = guess.split('');
@@ -229,6 +318,8 @@ body {
                 }
             }
         }
+
+
 
         function submitGuess() {
             let guess = $('#digit1').val() + $('#digit2').val() + $('#digit3').val() + $('#digit4').val();
@@ -264,38 +355,9 @@ body {
             });
         }
 
-        function restartGame() {
-            $.ajax({
-                type: 'POST',
-                url: 'codebreaker.php',
-                data: { restart: true },
-                success: function(response) {
-                    let data = JSON.parse(response);
-                    $('#message').html(data.message).removeClass('text-danger text-success');
-                    $('.digit-input').prop('disabled', false).val('');
-                    $('#submitGuessBtn').prop('disabled', false);
-                    $('#submitGameResults').hide(); // Hide results submission button
-                    startTimer();  // Restart the timer
-                    $('#digit1').focus();  // Focus on the first input field
-                    $('.digit-input').removeClass('correct present incorrect'); // Reset colors
 
-                    // Reset attempts counter
-                    attempts = 0;
-                }
-            });
-        }
 
-        $(document).ready(function() {
-            startTimer();
 
-            $('#submitGuessBtn').on('click', function() {
-                submitGuess();
-            });
-
-            $('#restartBtn').on('click', function() {
-                restartGame();
-            });
-        });
     </script>
 </body>
 </html>
